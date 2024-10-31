@@ -28,4 +28,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./public
         publish_branch: gh-pages
-        tag_name: ${{ github.event.release.tag_name }}
+        destination_dir: v${{ github.event.release.tag_name }}
