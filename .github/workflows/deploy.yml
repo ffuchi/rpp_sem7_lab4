@@ -11,14 +11,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
     - name: Build project
       run: npm run build
 
@@ -28,4 +20,8 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./public
         publish_branch: gh-pages
-        destination_dir: v${{ github.event.release.tag_name }}
+
+    - name: Create versioned directory
+      run: |
+        mkdir -p v${{ github.event.release.tag }}
+        cp -r ./public/* ./v${{ github.event.release.tag }}/
